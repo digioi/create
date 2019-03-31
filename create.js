@@ -18,7 +18,7 @@ async function autorun() {
 	let step1,
 		step2 = { bundle: Bundle.rollup + "-wc" },
 		step3;
-	console.log("\n👋  Welcome to Atomico\n");
+	console.log("\nWelcome to Atomico\n");
 	step1 = await prompts([
 		{
 			type: "select",
@@ -107,12 +107,12 @@ async function autorun() {
 			...step2,
 			...step3
 		},
-		base = path.resolve("base", data.bundle),
+		base = path.resolve(__dirname, "base/" + data.bundle),
 		dist = path.resolve(process.cwd(), data.name);
 
 	await template(base, dist, data);
 
-	console.log(`\n🙌 Ready!, check the folder ${data.name}\n`);
+	console.log(`\nReady!, check the folder ${data.name}\n`);
 }
 
 autorun();
