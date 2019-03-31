@@ -1,6 +1,6 @@
 {
-	"name": "my-app",
-	"description": "",
+	"name": "::name::",
+	"description": "::description::",
 	"version": "0.0.0",
 	"source": "src/index.js",
 	"output": "public/dist",

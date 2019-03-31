@@ -1,7 +1,7 @@
 {
-	"name": "base-parcel",
+	"name": "::name::",
+	"description": "::description::",
 	"version": "0.0.0",
-	"description": "",
 	"main": "index.html",
 	"scripts": {
 		"start": "parcel index.html --open",

@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 const { template } = require("template-folder");
 const prompts = require("prompts");
+const path = require("path");
 
 const Types = {
 	wc: "wc",
@@ -13,9 +16,9 @@ const Bundle = {
 
 async function autorun() {
 	let step1,
-		step2 = { bundle: Bundle.rollup },
+		step2 = { bundle: Bundle.rollup + "-wc" },
 		step3;
-
+	console.log("\n👋  Welcome to Atomico\n");
 	step1 = await prompts([
 		{
 			type: "select",
@@ -23,10 +26,18 @@ async function autorun() {
 			message: "Project Type",
 			choices: [
 				{ title: "Application", value: Types.app },
-				{ title: "Web Component", value: Types.wc }
+				{ title: "Web Component", value: Types.wc },
+				{
+					title: "Exit",
+					value: "exit"
+				}
 			]
 		}
 	]);
+	if (step1.type == "exit") {
+		console.log("");
+		return;
+	}
 	if (step1.type == Types.app) {
 		step2 = await prompts([
 			{
@@ -36,7 +47,7 @@ async function autorun() {
 				choices: [
 					{
 						title: "Rollup : base configuration for modern browsers",
-						value: Bundle.rollup
+						value: Bundle.rollup + "-mjs"
 					},
 					{
 						title: "Parceljs : base configuration for generic browsers",
@@ -67,8 +78,7 @@ async function autorun() {
 		}
 	];
 
-	if (step1.type == "app") {
-	} else {
+	if (step1.type == Types.wc) {
 		fieldsStep3.push(
 			{
 				type: "text",
@@ -91,6 +101,18 @@ async function autorun() {
 	}
 
 	step3 = await prompts(fieldsStep3);
+
+	let data = {
+			...step1,
+			...step2,
+			...step3
+		},
+		base = path.resolve("base", data.bundle),
+		dist = path.resolve(process.cwd(), data.name);
+
+	await template(base, dist, data);
+
+	console.log(`\n🙌 Ready!, check the folder ${data.name}\n`);
 }
 
 autorun();

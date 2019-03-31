@@ -10,7 +10,7 @@ function App() {
 					text-align:center;
 				}
 			`}</style>
-			Ahora
+			👋 Atomico!
 		</h1>
 	);
 }

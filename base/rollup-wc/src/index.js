@@ -1,7 +1,7 @@
 import { h, render } from "@atomico/core";
 import { Element } from "@atomico/element";
 
-class MyTag extends Element {
+class Tag extends Element {
 	render() {
 		return (
 			<host shadowDom>
@@ -13,10 +13,10 @@ class MyTag extends Element {
 					text-align:center;
 				}
 				`}</style>
-				Ahoras ready ready
+				👋 ::customElement::
 			</host>
 		);
 	}
 }
 
-customElements.define("my-tag", MyTag);
+customElements.define("::customElement::", Tag);
