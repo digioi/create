@@ -3,7 +3,7 @@
 	"description": "::description::",
 	"version": "0.0.0",
 	"source": "src/index.js",
-	"output": "public/dist",
+	"output": "public/src",
 	"public": "public",
 	"scripts": {
 		"build": "rollup -c",
@@ -12,7 +12,10 @@
 	},
 	"dependencies": {
 		"@atomico/core": "latest",
-		"@atomico/hostcss": "latest"
+		"@atomico/hostcss": "latest",
+		"@atomico/store": "latest",
+		"@atomico/element": "latest",
+		"@atomico/router": "latest"
 	},
 	"devDependencies": {
 		"chai": "^4.2.0",

@@ -25,7 +25,7 @@ let plugins = [
 ];
 
 if (process.env.ROLLUP_WATCH) {
-	plugins.push(browsersync());
+	plugins.push(browsersync({ single: true, server: "public" }));
 } else {
 	process.env.BUILD = "production";
 	plugins.push(terser());
