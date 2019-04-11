@@ -14,7 +14,7 @@ let globals = {
 
 let plugins = [
 	del({
-		targets: [pkg.module.replace(/([^\/]+)\/(.+)/, "$1")]
+		targets: [pkg.module.replace(/\/[^\/]+$/, "")]
 	}),
 	resolve({
 		extensions: [".js", ".ts"]
