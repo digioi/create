@@ -1,5 +1,5 @@
 import { h, render } from "@atomico/core";
-import { Element } from "@atomico/element";
+import Element from "@atomico/element";
 
 class Tag extends Element {
 	render() {
