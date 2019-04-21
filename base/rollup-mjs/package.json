@@ -1,10 +1,9 @@
 {
-	"name": "::name::",
-	"description": "::description::",
+	"name": "{{{name}}}",
+	"description": "{{{description}}}",
 	"version": "0.0.0",
 	"source": "src/index.js",
-	"output": "public/src",
-	"public": "public",
+	"output": "public/dist",
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
@@ -18,13 +17,11 @@
 		"@atomico/router": "latest"
 	},
 	"devDependencies": {
-		"chai": "^4.2.0",
 		"karma": "^4.0.1",
-		"karma-chai": "^0.1.0",
+		"karma-jasmine": "^2.0.1",
 		"karma-chrome-launcher": "^2.2.0",
-		"karma-mocha": "^1.3.0",
 		"karma-rollup-preprocessor": "^7.0.0",
-		"mocha": "^6.0.2",
+		"jasmine-core": "^3.4.0",
 		"rollup": "^1.7.4",
 		"rollup-plugin-browsersync": "^1.0.0",
 		"rollup-plugin-bundle-size": "^1.0.3",
@@ -32,6 +29,7 @@
 		"rollup-plugin-node-resolve": "^4.0.1",
 		"rollup-plugin-postcss": "^2.0.3",
 		"rollup-plugin-sucrase": "^2.1.0",
-		"rollup-plugin-terser": "^4.0.4"
+		"rollup-plugin-terser": "^4.0.4",
+		"@atomico/rollup-plugin-workbox": "^0.0.1"
 	}
 }

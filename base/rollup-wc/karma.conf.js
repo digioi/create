@@ -1,10 +1,11 @@
 /**
- * @link https://developers.google.com/web/updates/2017/06/headless-karma-mocha-chai
  * @link https://www.npmjs.com/package/karma-rollup-preprocessor
  */
 module.exports = function(config) {
 	config.set({
-		frameworks: ["mocha", "chai"],
+		frameworks: [
+			"jasmine"
+		],
 		files: [
 			{
 				pattern: "test/**/*.js",

@@ -14,6 +14,6 @@ describe("Element Lifecycle", () => {
 
 		render(<App />, scope);
 
-		assert(scope.querySelector("h1").textContent, "atomico");
+		expect(scope.querySelector("h1").textContent).toBe("atomico");
 	});
 });

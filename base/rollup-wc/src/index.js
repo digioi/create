@@ -13,10 +13,10 @@ class Tag extends Element {
 					text-align:center;
 				}
 				`}</style>
-				👋 ::customElement::
+				👋 {{ customElement }}
 			</host>
 		);
 	}
 }
 
-customElements.define("::customElement::", Tag);
+customElements.define("{{customElement}}", Tag);

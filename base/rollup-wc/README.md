@@ -6,14 +6,15 @@ This configuration allows the creation of a modern and light web-component based
 
 ```bash
 # development mode
-npm run dev 
+npm run dev
 # production mode
 npm run build
 ```
 
-## Directory 
+## Directory
+
 ```bash
-/src 
+/src
   index.js #entry code
 /test
 /dist #this directory is removed with each rollup cycle
@@ -32,7 +33,7 @@ By default, rollup loads the initial configuration from package.json:
 }
 ```
 
-## support 
+## support
 
 ### CSS
 
@@ -47,8 +48,8 @@ import css from "style.css";
 
 ### JS Y TS
 
-supported by [rollup-plugin-sucrase] (https://github.com/rollup/rollup-plugin-sucrase), this library allows manipulation of non-standardized JS and TS code.
+supported by [rollup-plugin-sucrase](https://github.com/rollup/rollup-plugin-sucrase), this library allows manipulation of non-standardized JS and TS code.
 
+## test
 
-
-
+The test stack is based on [karma](https://karma-runner.github.io/latest/index.html), [jasmine](https://jasmine.github.io/) and chrome, check the `/test` folder this has a small example of use

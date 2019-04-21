@@ -5,6 +5,9 @@ import sucrase from "rollup-plugin-sucrase";
 import del from "rollup-plugin-delete";
 import postcss from "rollup-plugin-postcss";
 import browsersync from "rollup-plugin-browsersync";
+import workbox from "@atomico/rollup-plugin-workbox";
+
+let publicDir = pkg.output.replace(/\/[^\/]+$/, "");
 
 let plugins = [
 	del({
@@ -21,11 +24,16 @@ let plugins = [
 		exclude: ["node_modules/**"],
 		jsxPragma: "h",
 		transforms: ["typescript", "jsx"]
+	}),
+	workbox({
+		globDirectory: publicDir,
+		globPatterns: ["index.html", "**/*.{js,css}"],
+		swDest: publicDir + "/sw-pwa.js"
 	})
 ];
 
 if (process.env.ROLLUP_WATCH) {
-	plugins.push(browsersync({ single: true, server: "public" }));
+	plugins.push(browsersync({ single: true, server: publicDir }));
 } else {
 	process.env.BUILD = "production";
 	plugins.push(terser());

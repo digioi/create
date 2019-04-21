@@ -1,11 +1,11 @@
 {
-	"name": "::name::",
+	"name": "{{name}}",
 	"version": "0.0.0",
-	"description": "::description::",
+	"description": "{{description}}",
 	"source": "src/index.js",
-	"module": "dist/::name::.mjs",
-	"unpkg": "dist/::name::.umd.js",
-	"author": "::author::",
+	"module": "dist/{{name}}.mjs",
+	"unpkg": "dist/{{name}}.umd.js",
+	"author": "{{author}}",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/"
@@ -13,20 +13,19 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"test": "karma start --single-run --browsers ChromeHeadless karma.conf.js"
+		"test": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
+		"prepare": "npm run build && npm run test"
 	},
 	"dependencies": {
 		"@atomico/core": "latest",
 		"@atomico/element": "latest"
 	},
 	"devDependencies": {
-		"chai": "^4.2.0",
 		"karma": "^4.0.1",
-		"karma-chai": "^0.1.0",
+		"karma-jasmine": "^2.0.1",
 		"karma-chrome-launcher": "^2.2.0",
-		"karma-mocha": "^1.3.0",
 		"karma-rollup-preprocessor": "^7.0.0",
-		"mocha": "^6.0.2",
+		"jasmine-core": "^3.4.0",
 		"rollup": "^1.7.4",
 		"rollup-plugin-browsersync": "^1.0.0",
 		"rollup-plugin-bundle-size": "^1.0.3",

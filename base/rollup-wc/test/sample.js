@@ -7,14 +7,16 @@ class Tag extends Element {
 	}
 }
 
-customElements.define("::customElement::", Tag);
+customElements.define("{{customElement}}", Tag);
 
 describe("Element Lifecycle", () => {
 	it("Example component", () => {
-		let node = document.createElement("::customElement::");
+		let node = document.createElement("{{customElement}}");
 
 		document.body.appendChild(node);
 
-		assert(document.querySelector("::customElement::").textContent, "atomico");
+		expect(document.querySelector("{{customElement}}").textContent).toBe(
+			"atomico"
+		);
 	});
 });
