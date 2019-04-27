@@ -1,18 +1,20 @@
-import { h, render } from "@atomico/core";
+import { h, Element } from "@atomico/element";
 
-function App() {
-	return (
-		<h1 shadowDom>
-			<style>{`
+class MyApp extends Element {
+	render() {
+		return (
+			<host shadowDom>
+				<style>{`
 				@import url('https://fonts.googleapis.com/css?family=Muli:400,900');
 				:host{
 					font-family: 'Muli', sans-serif;
 					text-align:center;
 				}
 			`}</style>
-			👋 Atomico!
-		</h1>
-	);
+				👋 Atomico!
+			</host>
+		);
+	}
 }
 
-render(<App />, document.querySelector("#app"));
+customElements.define("my-app", MyApp);

@@ -3,17 +3,15 @@
  */
 module.exports = function(config) {
 	config.set({
-		frameworks: [
-			"jasmine"
-		],
+		frameworks: ["jasmine"],
 		files: [
 			{
-				pattern: "test/**/*.js",
+				pattern: "test/**/*.test.js",
 				watched: true
 			}
 		],
 		preprocessors: {
-			"test/**/*.js": ["rollup"]
+			"test/**/*.test.js": ["rollup"]
 		},
 		rollupPreprocessor: {
 			plugins: [
@@ -36,10 +34,10 @@ module.exports = function(config) {
 				sourcemap: "inline" // Sensible for testing.
 			}
 		},
-		reporters: ["progress"],
+		reporters: ["spec"],
 		port: 9876, // karma web server port
 		colors: true,
-		logLevel: config.LOG_INFO,
+		logLevel: config.LOG_ERROR,
 		browsers: ["ChromeHeadless"],
 		autoWatch: false,
 		// singleRun: false, // Karma captures browsers, runs the tests and exits

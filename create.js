@@ -15,9 +15,14 @@ const Bundle = {
 };
 
 async function autorun() {
-	let step1,
-		step2 = { bundle: Bundle.rollup + "-wc" },
-		step3;
+	let step1;
+	let step2 = { bundle: Bundle.rollup + "-wc" };
+	let step3;
+	let exit;
+	let onCancel = () => {
+		exit = true;
+		console.log(":::cancel:::");
+	};
 	console.log("\nWelcome to Atomico\n");
 	step1 = await prompts([
 		{
@@ -25,8 +30,8 @@ async function autorun() {
 			name: "type",
 			message: "Project Type",
 			choices: [
-				{ title: "Application", value: Types.app },
-				{ title: "Web Component", value: Types.wc },
+				{ title: "Create application", value: Types.app },
+				{ title: "Create web component", value: Types.wc },
 				{
 					title: "Exit",
 					value: "exit"
@@ -35,27 +40,32 @@ async function autorun() {
 		}
 	]);
 	if (step1.type == "exit") {
-		console.log("");
+		onCancel();
 		return;
 	}
 	if (step1.type == Types.app) {
-		step2 = await prompts([
-			{
-				type: "select",
-				name: "bundle",
-				message: "bundle tool",
-				choices: [
-					{
-						title: "Rollup : base configuration for modern browsers",
-						value: Bundle.rollup + "-mjs"
-					},
-					{
-						title: "Parceljs : base configuration for generic browsers",
-						value: Bundle.parcel
-					}
-				]
-			}
-		]);
+		step2 = await prompts(
+			[
+				{
+					type: "select",
+					name: "bundle",
+					message: "bundle tool",
+					choices: [
+						{
+							title:
+								"Application PWA, configuration with Rollup, web-component and Dynamic import for modern browsers",
+							value: Bundle.rollup + "-mjs"
+						},
+						{
+							title:
+								"Application with Parceljs and @atomico/core, for generic browsers",
+							value: Bundle.parcel
+						}
+					]
+				}
+			],
+			{ onCancel }
+		);
 	}
 
 	let fieldsStep3 = [
@@ -74,7 +84,7 @@ async function autorun() {
 		{
 			type: "text",
 			name: "description",
-			message: "description :"
+			message: "Package description :"
 		}
 	];
 
@@ -83,7 +93,7 @@ async function autorun() {
 			{
 				type: "text",
 				name: "author",
-				message: "author :"
+				message: "Package author :"
 			},
 			{
 				type: "text",
@@ -100,7 +110,9 @@ async function autorun() {
 		);
 	}
 
-	step3 = await prompts(fieldsStep3);
+	step3 = await prompts(fieldsStep3, { onCancel });
+
+	if (exit) return;
 
 	let data = {
 			...step1,

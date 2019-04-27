@@ -20,6 +20,6 @@
 		"template-folder": "^1.4.0"
 	},
 	"bin": {
-		"create-atomico": "./create.js"
+		"atomico-proyect": "./create.js"
 	}
 }

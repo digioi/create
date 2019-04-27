@@ -11,17 +11,14 @@
 		"prepare": "npm run build"
 	},
 	"dependencies": {
-		"@atomico/core": "latest",
-		"@atomico/hostcss": "latest",
-		"@atomico/store": "latest",
-		"@atomico/element": "latest",
-		"@atomico/router": "latest"
+		"@atomico/element": "^0.4.x"
 	},
 	"devDependencies": {
 		"karma": "^4.0.1",
 		"karma-jasmine": "^2.0.1",
 		"karma-chrome-launcher": "^2.2.0",
 		"karma-rollup-preprocessor": "^7.0.0",
+		"karma-spec-reporter": "^0.0.32",
 		"jasmine-core": "^3.4.0",
 		"rollup": "^1.7.4",
 		"rollup-plugin-browsersync": "^1.0.0",
