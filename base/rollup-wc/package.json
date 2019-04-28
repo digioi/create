@@ -17,7 +17,7 @@
 		"prepare": "npm run build && npm run test"
 	},
 	"dependencies": {
-		"@atomico/element": "^0.4.x"
+		"@atomico/element": "^0.5.x"
 	},
 	"devDependencies": {
 		"karma": "^4.0.1",
