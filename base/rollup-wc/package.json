@@ -16,9 +16,7 @@
 		"test": "karma start --single-run --browsers ChromeHeadless karma.conf.js",
 		"prepare": "npm run build && npm run test"
 	},
-	"dependencies": {
-		"@atomico/element": "^0.5.x"
-	},
+	"dependencies": {{{dependencies}}},
 	"devDependencies": {
 		"karma": "^4.0.1",
 		"karma-jasmine": "^2.0.1",
