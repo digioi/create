@@ -9,14 +9,20 @@ const Types = {
 	app: "app"
 };
 
-const Bundle = {
-	rollup: "rollup",
-	parcel: "parcel"
+let dependencies = {
+	core: `{
+		"@atomico/core": "^1.4.x",
+		"@atomico/router": "^0.1.x",
+		"hostcss": "^0.0.x"
+	}`,
+	element: `{
+		"@atomico/element": "^0.5.x"
+	}`
 };
 
 async function autorun() {
 	let step1;
-	let step2 = { bundle: Bundle.rollup + "-wc" };
+	let step2 = { bundle: "rollup-wc" };
 	let step3;
 	let exit;
 	let onCancel = () => {
@@ -48,24 +54,26 @@ async function autorun() {
 			[
 				{
 					type: "select",
-					name: "bundle",
+					name: "dependencies",
 					message: "bundle tool",
 					choices: [
 						{
 							title:
-								"Application PWA, configuration with Rollup, web-component and Dynamic import for modern browsers",
-							value: Bundle.rollup + "-mjs"
+								"@atomico/core + @atomico/router + hostcss(css-in-js) : Development outside web-components",
+							value: dependencies.core
 						},
 						{
-							title:
-								"Application with Parceljs and @atomico/core, for generic browsers",
-							value: Bundle.parcel
+							title: "@atomico/element : Development within web-components",
+							value: dependencies.element
 						}
 					]
 				}
 			],
 			{ onCancel }
 		);
+		step2.bundle = "rollup-mjs";
+	} else {
+		step2.dependencies = dependencies.element;
 	}
 
 	let fieldsStep3 = [
@@ -115,12 +123,13 @@ async function autorun() {
 	if (exit) return;
 
 	let data = {
-			...step1,
-			...step2,
-			...step3
-		},
-		base = path.resolve(__dirname, "base/" + data.bundle),
-		dist = path.resolve(process.cwd(), data.name);
+		...step1,
+		...step2,
+		...step3
+	};
+
+	let base = path.resolve(__dirname, "base/" + data.bundle);
+	let dist = path.resolve(process.cwd(), data.name);
 
 	await template(base, dist, data);
 
