@@ -4,40 +4,40 @@ const { template } = require("template-folder");
 const prompts = require("prompts");
 const path = require("path");
 
-const Types = {
-	wc: "wc",
-	app: "app"
+const bundle = {
+	wc: "rollup-wc",
+	app: "rollup-mjs"
 };
 
 let dependencies = {
-	core: `{
+	app: `{
 		"@atomico/core": "^1.4.x",
 		"@atomico/router": "^0.1.x",
-		"hostcss": "^0.0.x"
+		"@atomico/element": "^0.6.x",
+		"hostcss": "^0.1.x"
 	}`,
-	element: `{
-		"@atomico/element": "^0.5.x"
+	wc: `{
+		"@atomico/core": "^1.4.x",
+		"@atomico/element": "^0.6.x"
 	}`
 };
 
 async function autorun() {
-	let step1;
-	let step2 = { bundle: "rollup-wc" };
-	let step3;
 	let exit;
 	let onCancel = () => {
 		exit = true;
 		console.log(":::cancel:::");
 	};
 	console.log("\nWelcome to Atomico\n");
-	step1 = await prompts([
+
+	let data = await prompts([
 		{
 			type: "select",
-			name: "type",
+			name: "bundle",
 			message: "Project Type",
 			choices: [
-				{ title: "Create application", value: Types.app },
-				{ title: "Create web component", value: Types.wc },
+				{ title: "Create application", value: bundle.app },
+				{ title: "Create web component", value: bundle.wc },
 				{
 					title: "Exit",
 					value: "exit"
@@ -45,38 +45,15 @@ async function autorun() {
 			]
 		}
 	]);
-	if (step1.type == "exit") {
+
+	if (data.bundle == "exit") {
 		onCancel();
 		return;
 	}
-	if (step1.type == Types.app) {
-		step2 = await prompts(
-			[
-				{
-					type: "select",
-					name: "dependencies",
-					message: "bundle tool",
-					choices: [
-						{
-							title:
-								"@atomico/core + @atomico/router + hostcss(css-in-js) : Development outside web-components",
-							value: dependencies.core
-						},
-						{
-							title: "@atomico/element : Development within web-components",
-							value: dependencies.element
-						}
-					]
-				}
-			],
-			{ onCancel }
-		);
-		step2.bundle = "rollup-mjs";
-	} else {
-		step2.dependencies = dependencies.element;
-	}
 
-	let fieldsStep3 = [
+	data.dependencies = dependencies[data.bundle == bundle.app ? "app" : "wc"];
+
+	let packageFields = [
 		{
 			type: "text",
 			name: "name",
@@ -96,8 +73,8 @@ async function autorun() {
 		}
 	];
 
-	if (step1.type == Types.wc) {
-		fieldsStep3.push(
+	if (data.bundle == bundle.wc) {
+		packageFields.push(
 			{
 				type: "text",
 				name: "author",
@@ -118,15 +95,9 @@ async function autorun() {
 		);
 	}
 
-	step3 = await prompts(fieldsStep3, { onCancel });
+	data = { ...data, ...(await prompts(packageFields, { onCancel })) };
 
 	if (exit) return;
-
-	let data = {
-		...step1,
-		...step2,
-		...step3
-	};
 
 	let base = path.resolve(__dirname, "base/" + data.bundle);
 	let dist = path.resolve(process.cwd(), data.name);

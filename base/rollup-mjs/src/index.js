@@ -1,20 +1,18 @@
-import { h, Element } from "@atomico/element";
+import { h, render, useEffect } from "@atomico/core";
+import styled from "hostcss/atomico";
 
-class MyApp extends Element {
-	render() {
-		return (
-			<host shadowDom>
-				<style>{`
-				@import url('https://fonts.googleapis.com/css?family=Muli:400,900');
-				:host{
-					font-family: 'Muli', sans-serif;
-					text-align:center;
-				}
-			`}</style>
-				👋 Atomico!
-			</host>
-		);
-	}
+let View = styled("section")`
+	@import url("https://fonts.googleapis.com/css?family=Muli:400,900");
+	font-family: "Muli", sans-serif;
+	text-align: center;
+	padding: 50px;
+`;
+
+function App() {
+	useEffect(() => {
+		console.log("App mounted");
+	});
+	return <View>👋 Atomico!</View>;
 }
 
-customElements.define("my-app", MyApp);
+render(<App />, document.querySelector("#app"));
