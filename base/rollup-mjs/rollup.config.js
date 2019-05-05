@@ -28,7 +28,8 @@ let plugins = [
 	workbox({
 		globDirectory: publicDir,
 		globPatterns: ["index.html", "**/*.{js,css}"],
-		swDest: publicDir + "/sw-pwa.js"
+		swDest: publicDir + "/sw.js",
+		navigateFallback: "index.html"
 	})
 ];
 
