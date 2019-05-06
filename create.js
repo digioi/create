@@ -100,8 +100,8 @@ async function autorun() {
 	if (exit) return;
 
 	let base = path.resolve(__dirname, "base/" + data.bundle);
-	let dist = path.resolve(process.cwd(), data.name);
-
+	let dist = "./" + data.name;
+	
 	await template(base, dist, data);
 
 	console.log(`\nReady!, check the folder ${data.name}\n`);
